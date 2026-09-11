@@ -1,0 +1,273 @@
+{
+  "info": {
+    "_postman_id": "b8f28462-1750-42d6-bbfd-ca3750edb3d0",
+    "name": "Projects",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "13015280",
+    "_collection_link": "https://go.postman.co/collection/13015280-b8f28462-1750-42d6-bbfd-ca3750edb3d0?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Crear",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var response = pm.response.json()\r",
+              "pm.collectionVariables.set(\"PROJECT_ID\",response.Id);\r",
+              "\r",
+              "pm.test(\"Verificar Codigo Respuesta sea 200\", function() {\r",
+              "    pm.response.to.have.status(200);\r",
+              "})\r",
+              "pm.test(\"Verificar que el contenido del proyecto sea 'Curso API Rest'\", function () {\r",
+              "    pm.expect(response.Content).to.eql(\"Curso API Rest\");\r",
+              "})\r",
+              "pm.test(\"Verificar Project Icon\",function(){\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.Icon).to.eql(3);\r",
+              "})"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"Content\":\"Curso API Rest\",\r\n    \"Icon\": 3\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://todo.ly/api/projects.json",
+          "protocol": "https",
+          "host": [
+            "todo",
+            "ly"
+          ],
+          "path": [
+            "api",
+            "projects.json"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Editar",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var response = pm.response.json()\r",
+              "pm.collectionVariables.set(\"PROJECT_ID\",response.Id);\r",
+              "\r",
+              "pm.test(\"Verificar Codigo Respuesta sea 200\", function() {\r",
+              "    pm.response.to.have.status(200);\r",
+              "})\r",
+              "pm.test(\"Verificar que el contenido del proyecto sea 'Curso API Rest Modificado'\", function () {\r",
+              "    pm.expect(response.Content).to.eql(\"Curso API Rest Modificado\");\r",
+              "})\r",
+              "pm.test(\"Verificar Project Icon\",function(){\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.Icon).to.eql(3);\r",
+              "})"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"Content\":\"Curso API Rest Modificado\",\r\n    \"Icon\": 3\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://todo.ly/api/projects/{{PROJECT_ID}}.json",
+          "protocol": "https",
+          "host": [
+            "todo",
+            "ly"
+          ],
+          "path": [
+            "api",
+            "projects",
+            "{{PROJECT_ID}}.json"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Buscar",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var response = pm.response.json()\r",
+              "pm.collectionVariables.set(\"PROJECT_ID\",response.Id);\r",
+              "\r",
+              "pm.test(\"Verificar Codigo Respuesta sea 200\", function() {\r",
+              "    pm.response.to.have.status(200);\r",
+              "})\r",
+              "pm.test(\"Verificar que el contenido del proyecto sea 'Curso API Rest Modificado'\", function () {\r",
+              "    pm.expect(response.Content).to.eql(\"Curso API Rest Modificado\");\r",
+              "})\r",
+              "pm.test(\"Verificar Project Icon\",function(){\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.Icon).to.eql(3);\r",
+              "})"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://todo.ly/api/projects/{{PROJECT_ID}}.json",
+          "protocol": "https",
+          "host": [
+            "todo",
+            "ly"
+          ],
+          "path": [
+            "api",
+            "projects",
+            "{{PROJECT_ID}}.json"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var response = pm.response.json()\r",
+              "pm.collectionVariables.set(\"PROJECT_ID\",response.Id);\r",
+              "\r",
+              "pm.test(\"Verificar Codigo Respuesta sea 200\", function() {\r",
+              "    pm.response.to.have.status(200);\r",
+              "})\r",
+              "pm.test(\"Verificar que el contenido del proyecto sea 'Curso API Rest Modificado'\", function () {\r",
+              "    pm.expect(response.Content).to.eql(\"Curso API Rest Modificado\");\r",
+              "})\r",
+              "pm.test(\"Verificar Project Icon\",function(){\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.Icon).to.eql(3);\r",
+              "})\r",
+              "pm.test(\"Verificar Eliminación Proyecto\",function(){\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.Deleted).to.equal=true;\r",
+              "})"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "https://todo.ly/api/projects/{{PROJECT_ID}}.json",
+          "protocol": "https",
+          "host": [
+            "todo",
+            "ly"
+          ],
+          "path": [
+            "api",
+            "projects",
+            "{{PROJECT_ID}}.json"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "smbr.api.rest@gmail.com",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "smbr.api.rest",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          "var response = pm.response.json()\r",
+          "\r",
+          "//imprimir response\r",
+          "console.log(response);\r",
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "PROJECT_ID",
+      "value": ""
+    },
+    {
+      "key": "auth_password_0spb",
+      "secret": true
+    },
+    {
+      "key": "auth_password_0bbe",
+      "secret": true
+    }
+  ]
+}
