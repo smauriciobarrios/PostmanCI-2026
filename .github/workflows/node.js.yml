@@ -1,6 +1,3 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
-
 name: ApiTest
 
 on:
@@ -11,16 +8,30 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
-    - name: Use Node.js
+
+    - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '22.x'
-    - name: install newman
+        node-version: 22
+
+    - name: Install Newman
       run: npm install -g newman
-    - name: run test
-      run: newman run Projects.postman_collection.json
+
+    - name: Create results directory
+      run: mkdir -p results
+
+    - name: Run Todo.ly-Projects API tests con reportes
+      run: newman run Projects.postman_collection.json -r cli,html --reporter-html-export results/Projects.postman_collection.html
+
+    - name: Run Items API tests con reportes
+      run: newman run postman/ItemsAPIMethods.postman_collection.json -r cli,html --reporter-html-export results/ItemsAPIMethods.postman_collection.html
+  
+    - name: Upload Newman reports
+      uses: actions/upload-artifact@v4
+      with:
+        name: newman-reports
+        path: results/
