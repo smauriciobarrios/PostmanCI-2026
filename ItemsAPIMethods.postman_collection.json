@@ -1,0 +1,297 @@
+{
+  "info": {
+    "_postman_id": "764c7a81-433a-48f9-afea-fd74a1bb8577",
+    "name": "Items API Methods",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "13015280",
+    "_collection_link": "https://go.postman.co/collection/13015280-764c7a81-433a-48f9-afea-fd74a1bb8577?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Create new Item",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var response = pm.response.json()\r",
+              "pm.collectionVariables.set(\"ITEM_ID\",response.Id);\r",
+              "\r",
+              "pm.test(\"Verificar Codigo Respuesta sea 200\", function() {\r",
+              "    pm.response.to.have.status(200);\r",
+              "})\r",
+              "pm.test(\"Verificar que el contenido del proyecto sea 'Nuevo Item de Prueba'\", function () {\r",
+              "    pm.expect(response.Content).to.eql(\"Nuevo Item de Prueba\");\r",
+              "})\r",
+              "pm.test(\"Verificar Item Type\",function(){\r",
+              "    pm.expect(response.ItemType).to.eql(1);\r",
+              "})"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"Content\":\"Nuevo Item de Prueba\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://todo.ly/api/items.json",
+          "protocol": "https",
+          "host": [
+            "todo",
+            "ly"
+          ],
+          "path": [
+            "api",
+            "items.json"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Items",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var response = pm.response.json()\r",
+              "\r",
+              "pm.test(\"Verificar Codigo Respuesta sea 200\", function() {\r",
+              "    pm.response.to.have.status(200);\r",
+              "})\r",
+              "pm.test(\"Verificar que el contenido de la respuesta sea un array\", function () {\r",
+              "    pm.expect(response).to.be.an('array');\r",
+              "})\r",
+              "pm.test(\"Verificar que el array tenga al menos 2 elementos\", function () {\r",
+              "    pm.expect(response).to.have.lengthOf.at.least(2);\r",
+              "})\r",
+              "pm.test(\"Verificar cantidad de resultados obtenidos: \"+response.length,function(){\r",
+              "//    pm.expect(response.length).to.equal(12)\r",
+              "})  "
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://todo.ly/api/items.json",
+          "protocol": "https",
+          "host": [
+            "todo",
+            "ly"
+          ],
+          "path": [
+            "api",
+            "items.json"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Item By Id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var response = pm.response.json()\r",
+              "\r",
+              "pm.test(\"Verificar Codigo Respuesta sea 200\", function() {\r",
+              "    pm.response.to.have.status(200);\r",
+              "})\r",
+              "pm.test(\"Verificar que el contenido del proyecto sea 'Nuevo Item de Prueba'\", function () {\r",
+              "    pm.expect(response.Content).to.eql(\"Nuevo Item de Prueba\");\r",
+              "})\r",
+              "pm.test(\"Verificar Project Icon\",function(){\r",
+              "    pm.expect(response.ItemType).to.eql(1);\r",
+              "})"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://todo.ly/api/items/{{ITEM_ID}}.json",
+          "protocol": "https",
+          "host": [
+            "todo",
+            "ly"
+          ],
+          "path": [
+            "api",
+            "items",
+            "{{ITEM_ID}}.json"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Item By Id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var response = pm.response.json()\r",
+              "\r",
+              "pm.test(\"Verificar Codigo Respuesta sea 200\", function() {\r",
+              "    pm.response.to.have.status(200);\r",
+              "})\r",
+              "pm.test(\"Verificar cambio de estado Checked=TRUE\",function(){\r",
+              "    pm.expect(response.Checked).to.eql(true);\r",
+              "})\r",
+              "pm.test(\"Verificar cambio de estado InHistory=TRUE\",function(){\r",
+              "    pm.expect(response.Checked).to.eql(true);\r",
+              "})"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"Checked\":\"true\",\r\n    \"InHistory\": \"true\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://todo.ly/api/items/{{ITEM_ID}}.json",
+          "protocol": "https",
+          "host": [
+            "todo",
+            "ly"
+          ],
+          "path": [
+            "api",
+            "items",
+            "{{ITEM_ID}}.json"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Item By Id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var response = pm.response.json()\r",
+              "var ITEM_ID = pm.collectionVariables.get(\"ITEM_ID\")\r",
+              "\r",
+              "pm.test(\"Verificar Codigo Respuesta sea 200\", function() {\r",
+              "    pm.response.to.have.status(200);\r",
+              "})\r",
+              "pm.test(\"Verificar Item Id eliminado: \"+ITEM_ID,function(){\r",
+              "    pm.expect(response.Id).to.eql(ITEM_ID);\r",
+              "})\r",
+              "pm.test(\"Verificar cambio de estado a 'Deleted' \",function(){\r",
+              "    pm.expect(response.Deleted).to.equal=true;\r",
+              "})"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "https://todo.ly/api/items/{{ITEM_ID}}.json",
+          "protocol": "https",
+          "host": [
+            "todo",
+            "ly"
+          ],
+          "path": [
+            "api",
+            "items",
+            "{{ITEM_ID}}.json"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "password",
+        "value": "smbr.api.rest",
+        "type": "string"
+      },
+      {
+        "key": "username",
+        "value": "smbr.api.rest@gmail.com",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "ITEM_ID",
+      "value": ""
+    }
+  ]
+}
