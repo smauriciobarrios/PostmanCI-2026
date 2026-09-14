@@ -28,7 +28,7 @@ jobs:
       run: newman run Projects.postman_collection.json -r cli,html --reporter-html-export results/Projects.postman_collection.html
 
     - name: Run Items API tests con reportes
-      run: newman run postman/ItemsAPIMethods.postman_collection.json -r cli,html --reporter-html-export results/ItemsAPIMethods.postman_collection.html
+      run: newman run ItemsAPIMethods.postman_collection.json -r cli,html --reporter-html-export results/ItemsAPIMethods.postman_collection.html
   
     - name: Upload Newman reports
       uses: actions/upload-artifact@v4
