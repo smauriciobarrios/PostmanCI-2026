@@ -18,17 +18,17 @@ jobs:
       with:
         node-version: 22
 
-    - name: Install Newman
-      run: npm install -g newman
+    - name: Install Newman + HTML reporter
+      run: npm install -g newman newman-reporter-html
 
     - name: Create results directory
       run: mkdir -p results
 
-    - name: Run Todo.ly-Projects API tests con reportes
+    - name: Run Projects API tests con reportes
       run: newman run Projects.postman_collection.json -r cli,html --reporter-html-export results/Projects.postman_collection.html
 
     - name: Run Items API tests con reportes
-      run: newman run ItemsAPIMethods.postman_collection.json -r cli,html --reporter-html-export results/ItemsAPIMethods.postman_collection.html
+      run: newman run postman/ItemsAPIMethods.postman_collection.json -r cli,html --reporter-html-export results/ItemsAPIMethods.postman_collection.html
   
     - name: Upload Newman reports
       uses: actions/upload-artifact@v4
